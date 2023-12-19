@@ -1,11 +1,6 @@
 name: Streamlit WS
 language: python
-variables:
-  - name: input
-    inputType: InputTopic
-    description: This is the input topic to read data from
-    defaultValue: ''
-    required: true
+variables: []
 dockerfile: build/dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
