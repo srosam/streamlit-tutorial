@@ -82,6 +82,24 @@ deployments:
       urlPrefix: streamlitws-f334b0
     desiredStatus: Running
     variables: *o0
+  - name: Streamlit
+    application: Streamlit
+    deploymentType: Service
+    version: 02a8f821a29a55bb794f9471beb84ed96e38eab7
+    resources:
+      cpu: 200
+      memory: 200
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: streamlit
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: true
+        value: f1-data
 
 # This section describes the Topics of the data pipeline
 topics:
