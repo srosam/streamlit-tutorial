@@ -1,12 +1,36 @@
-import quixstreams as qx
-import os
+import streamlit as st
+import pandas as pd
+import requests
+import matplotlib.pyplot as plt
+import time
 
-# Quix injects credentials automatically to the client.
-# Alternatively, you can always pass an SDK token manually as an argument.
-client = qx.QuixStreamingClient()
+# Create a dataframe to store the data
+df = pd.DataFrame(columns=['timestamp', 'Speed'])
 
-# Use Input / Output topics to stream data in or out of your service
-consumer_topic = client.get_topic_consumer(os.environ["input"])
-producer_topic = client.get_topic_producer(os.environ["output"])
+# Define the API URL
+url = 'https://flaskapi-c746027-streamlittutorial-streamlittutorial-a46e73b8.deployments.quix.io'
 
-# for more samples, please see samples or docs
+# Create a placeholder for the chart
+chart_placeholder = st.empty()
+
+# Define a function to poll data from the API
+def poll_data():
+    while True:
+        response = requests.get(url)
+        data = response.json()
+        if 'Speed' in data:
+            df.loc[len(df)] = [data['timestamp'], data['Speed']]
+            plot_chart()
+        time.sleep(1)  # Wait for a second before polling again
+
+# Define a function to plot the chart
+def plot_chart():
+    plt.figure(figsize=(10, 5))
+    plt.plot(df['timestamp'], df['Speed'])
+    plt.xlabel('Timestamp')
+    plt.ylabel('Speed')
+    plt.title('Speed over Time')
+    chart_placeholder.pyplot(plt)
+
+# Poll data from the API
+poll_data()
