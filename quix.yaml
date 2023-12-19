@@ -1,0 +1,25 @@
+# Quix Project Descriptor
+# This file describes the data pipeline and configuration of resources of a Quix Project.
+
+metadata:
+  version: 1.0
+
+# This section describes the Deployments of the data pipeline
+deployments:
+  - name: Demo Data
+    application: Demo Data
+    deploymentType: Job
+    version: a103b2f191428ebf7e426db6592c9abafb0860a0
+    resources:
+      cpu: 200
+      memory: 200
+      replicas: 1
+    variables:
+      - name: Topic
+        inputType: OutputTopic
+        description: Name of the output topic to write into
+        required: true
+        value: f1-data
+
+# This section describes the Topics of the data pipeline
+topics: []
