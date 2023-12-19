@@ -93,7 +93,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: streamlit-dash
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
