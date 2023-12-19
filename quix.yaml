@@ -20,6 +20,24 @@ deployments:
         description: Name of the output topic to write into
         required: true
         value: f1-data
+  - name: Flask API
+    application: Flask API
+    deploymentType: Service
+    version: c746027dd167cddff861b11afe429e55e0e72577
+    resources:
+      cpu: 300
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: flaskapi-c746027
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: f1-data
 
 # This section describes the Topics of the data pipeline
 topics:
