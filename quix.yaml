@@ -92,7 +92,7 @@ deployments:
       replicas: 1
     publicAccess:
       enabled: true
-      urlPrefix: streamlit
+      urlPrefix: streamlit-dash
     desiredStatus: Stopped
     variables:
       - name: input
