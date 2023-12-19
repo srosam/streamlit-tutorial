@@ -50,7 +50,7 @@ deployments:
       enabled: true
       urlPrefix: streamlitusinghttp
     desiredStatus: Running
-    variables: []
+    variables: &o0 []
   - name: WS Server
     application: WS Server
     deploymentType: Service
@@ -72,7 +72,7 @@ deployments:
   - name: Streamlit WS
     application: Streamlit WS
     deploymentType: Service
-    version: f334b04434f7dd8242ae8873f78aee9bbca87b2b
+    version: 675e516726dfd5e9f0fa399460565e7c0b60fc2c
     resources:
       cpu: 200
       memory: 500
@@ -81,12 +81,7 @@ deployments:
       enabled: true
       urlPrefix: streamlitws-f334b0
     desiredStatus: Running
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the input topic to read data from
-        required: true
-        value: f1-data
+    variables: *o0
 
 # This section describes the Topics of the data pipeline
 topics:
