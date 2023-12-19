@@ -1,12 +1,37 @@
-import quixstreams as qx
-import os
+import streamlit as st
+import pandas as pd
+import json
+import asyncio
+import websockets
+import matplotlib.pyplot as plt
 
-# Quix injects credentials automatically to the client.
-# Alternatively, you can always pass an SDK token manually as an argument.
-client = qx.QuixStreamingClient()
+# Create a dataframe to store the data
+df = pd.DataFrame(columns=['timestamp', 'Speed'])
 
-# Use Input / Output topics to stream data in or out of your service
-consumer_topic = client.get_topic_consumer(os.environ["input"])
-producer_topic = client.get_topic_producer(os.environ["output"])
+# Define the WebSocket URL
+url = 'wss://   /timeseries'
 
-# for more samples, please see samples or docs
+# Create a placeholder for the chart
+chart_placeholder = st.empty()
+
+# Define an async function to receive data from the WebSocket
+async def receive_data():
+    async with websockets.connect(url) as ws:
+        while True:
+            data = await ws.recv()
+            data = json.loads(data)
+            if 'Speed' in data:
+                df.loc[len(df)] = [data['timestamp'], data['Speed']]
+            plot_chart()
+
+# Define a function to plot the chart
+def plot_chart():
+    plt.figure(figsize=(10, 5))
+    plt.plot(df['timestamp'], df['Speed'])
+    plt.xlabel('Timestamp')
+    plt.ylabel('Speed')
+    plt.title('Speed over Time')
+    chart_placeholder.pyplot(plt)
+
+# Run the async function
+asyncio.run(receive_data())
