@@ -1,1 +1,5 @@
 quixstreams==0.5.7
+flask
+flask-cors
+cryptography
+waitress
