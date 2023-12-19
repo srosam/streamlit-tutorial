@@ -1,1 +1,7 @@
 quixstreams==0.5.7
+streamlit==1.22
+cherrypy==18.8.0
+streamlit_ace
+websockets
+asyncio
+matplotlib
