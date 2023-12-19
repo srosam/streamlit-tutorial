@@ -10,6 +10,7 @@ class DataConsumer():
         self.queue = queue
         self.data = pd.DataFrame()
         client = qx.QuixStreamingClient()
+        
         self.topic = client.get_topic_consumer(os.environ["input"])
     
     # subscription is moved to start() to give the client of this code more control
