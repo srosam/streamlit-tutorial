@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 df = pd.DataFrame(columns=['timestamp', 'Speed'])
 
 # Define the WebSocket URL
-url = 'wss://   /timeseries'
+url = 'wss://wsserver-3ffc1ec-streamlittutorial-streamlittutorial-a46e73b8.deployments.quix.io/timeseries'
 
 # Create a placeholder for the chart
 chart_placeholder = st.empty()
