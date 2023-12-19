@@ -51,6 +51,24 @@ deployments:
       urlPrefix: streamlitusinghttp
     desiredStatus: Running
     variables: []
+  - name: WS Server
+    application: WS Server
+    deploymentType: Service
+    version: 3ffc1ec7968116a9c5d01a6cb2c29e7f8dcda367
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: wsserver-3ffc1ec
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: f1-data
 
 # This section describes the Topics of the data pipeline
 topics:
